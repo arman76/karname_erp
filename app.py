@@ -90,6 +90,7 @@ def restart(bot, update, user_data):
         for l in ls:
             if l.split('=')[0] != str(update.message.chat_id):
                 f.write(l)
+    os.system('rm '+str(update.message.chat_id))
 
     update.message.reply_text('اطلاعاتت پاک شد از لیست هم اومدی بیرون.', reply_markup=markup)
 
