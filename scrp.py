@@ -71,6 +71,8 @@ def main(bot, chat_id, user_data):
             bot.send_message(chat_id=chat_id, text='اولین بار:\n'+t2, reply_markup=markup)
         with open(str(chat_id), 'w') as f:
             f.write(t2)
+        del t2
+        del text
 
     except selenium.common.exceptions.TimeoutException:
         print('selenium.common.exceptions.TimeoutException')
