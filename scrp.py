@@ -74,7 +74,15 @@ def main(bot, chat_id, user_data):
 
     except selenium.common.exceptions.TimeoutException:
         print('selenium.common.exceptions.TimeoutException')
-        bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
+        
+        try:
+          with open(str(chat_id), 'r') as f:
+            print('اررررررررررررررررررروووووووووووووووووووووررررررررررر')
+        except FileNotFoundError:
+          bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
+        
+        
+        
         print(user_data)
         try:
             driver.close()
@@ -84,7 +92,8 @@ def main(bot, chat_id, user_data):
     except Exception as e:
         print(e.args)
         print(user_data)
-        bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
+        print('اررررررررررررررررررررروووووووووووووووووورررررررررر۲۲۲۲۲۲۲۲۲۲۲۲۲')
+        #bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
         try:
             driver.close()
         except Exception as e:
