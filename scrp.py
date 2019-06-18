@@ -74,6 +74,7 @@ def main(bot, chat_id, user_data):
 
     except selenium.common.exceptions.TimeoutException:
         print('selenium.common.exceptions.TimeoutException')
+        bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
         print(user_data)
         try:
             driver.close()
