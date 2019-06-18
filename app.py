@@ -56,7 +56,7 @@ def received_userpass(bot, update, user_data):
         with open('list.txt', 'a') as f:
             f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
 
-        update.message.reply_text('خب الان وارد لیست شدی! هر موقع اتفاقی افتاد کارنامه رو برات میفرستم!')
+        update.message.reply_text('خب الان وارد لیست شدی! هر موقع اتفاقی افتاد کارنامه رو برات میفرستم!', reply_markup=markup)
 
         del user_data['start_app']
         return CHOOSING
@@ -77,7 +77,7 @@ def add_to_list(bot, update, user_data):
         f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
 
     bot.send_message(chat_id=update.message.chat.id,
-                     text='خب الان تو لیستی! هر موقع کارنامه ت تغییری کرد میفرستم برات!')
+                     text='خب الان تو لیستی! هر موقع کارنامه ت تغییری کرد میفرستم برات!', reply_markup=markup)
     return CHOOSING
 
 
