@@ -54,7 +54,7 @@ def received_userpass(bot, update, user_data):
     del user_data['choice']
     if 'start_app' in user_data:
         with open('list.txt', 'a') as f:
-            f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
+            f.write('\n'+str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
 
         update.message.reply_text('خب الان وارد لیست شدی! هر موقع اتفاقی افتاد کارنامه رو برات میفرستم!', reply_markup=markup)
 
@@ -74,7 +74,7 @@ def add_to_list(bot, update, user_data):
         return USERPASS
 
     with open('list.txt', 'a') as f:
-        f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
+        f.write('\n'+str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password'])
 
     bot.send_message(chat_id=update.message.chat.id,
                      text='خب الان تو لیستی! هر موقع کارنامه ت تغییری کرد میفرستم برات!', reply_markup=markup)
