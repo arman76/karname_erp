@@ -13,6 +13,7 @@ def main(bot):
             with open('list.txt', 'r') as f:
                 print(f.readlines())
             sleep(5)
+        ml = []
         with open('list.txt', 'r') as f:
             for l in f.readlines():
                 ml.append(l.replace('\n', ''))
