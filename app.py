@@ -53,6 +53,12 @@ def received_userpass(bot, update, user_data):
         return USERPASS
     del user_data['choice']
     if 'start_app' in user_data:
+        with open('list.txt', 'r') as f:
+            ls = f.readlines()
+        with open('list.txt', 'w') as f:
+            for l in ls:
+                if l.split('=')[0] != str(update.message.chat_id):
+                    f.write(l)
         with open('list.txt', 'a') as f:
             f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password']+'\n')
 
@@ -72,7 +78,13 @@ def add_to_list(bot, update, user_data):
         bot.send_message(chat_id=update.message.chat_id, text='خب {} خودتو بده:'.format('نام کاربری'))
         user_data['choice'] = 'username'
         return USERPASS
-
+    
+    with open('list.txt', 'r') as f:
+        ls = f.readlines()
+    with open('list.txt', 'w') as f:
+        for l in ls:
+            if l.split('=')[0] != str(update.message.chat_id):
+                f.write(l)
     with open('list.txt', 'a') as f:
         f.write(str(update.message.chat_id) + '=' + user_data['username'] + ':' + user_data['password']+'\n')
 
