@@ -66,13 +66,14 @@ def main(bot, chat_id, user_data):
         try:
             with open(str(chat_id), 'r') as f:
                 if f.read() != t2:
-                    bot.send_message(chat_id=chat_id, text=t2, reply_markup=markup)
+                    bot.send_message(chat_id=chat_id, text='اوه اوه یه اتفاقی افتاده!:\n'+t2, reply_markup=markup)
         except FileNotFoundError:
             bot.send_message(chat_id=chat_id, text='اولین بار:\n'+t2, reply_markup=markup)
         with open(str(chat_id), 'w') as f:
             f.write(t2)
         del t2
         del text
+        print('ok')
 
     except selenium.common.exceptions.TimeoutException:
         print('selenium.common.exceptions.TimeoutException')
