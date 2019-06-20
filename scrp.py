@@ -67,8 +67,10 @@ def main(bot, chat_id, user_data):
             with open(str(chat_id), 'r') as f:
                 if f.read() != t2:
                     bot.send_message(chat_id=chat_id, text='اوه اوه یه اتفاقی افتاده!:\n'+t2, reply_markup=markup)
+                    print('تغییر')
         except FileNotFoundError:
             bot.send_message(chat_id=chat_id, text='اولین بار:\n'+t2, reply_markup=markup)
+            print('اولین بار')
         with open(str(chat_id), 'w') as f:
             f.write(t2)
         del t2
