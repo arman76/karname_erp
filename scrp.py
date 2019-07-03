@@ -41,7 +41,7 @@ def main(bot, chat_id, user_data):
         elem.click()
         elem = wait.until(ec.presence_of_element_located((By.ID, 'iframe_020205')))
         driver.get(elem.get_property('src'))
-
+        sleep(5)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.close()
         ts = soup.find_all('table', class_='grd')
