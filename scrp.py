@@ -46,7 +46,7 @@ def main(bot, chat_id, user_data):
         driver.close()
         ts = soup.find_all('table', class_='grd')
         del soup
-        t = ts[-1]
+        t = ts[-2]
 
         del ts
         text: str = t.get_text()
