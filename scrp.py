@@ -16,6 +16,7 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 def main(bot, chat_id, user_data):
     driver = webdriver.PhantomJS()
+    driver.set_script_timeout(10)
     try:
         driver.get("http://erp.guilan.ac.ir/Dashboard.aspx")
         if 'erp.guilan.ac.ir/GoToDashboard.aspx' in driver.current_url:
