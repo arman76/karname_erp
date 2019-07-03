@@ -7,7 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from telegram import ReplyKeyboardMarkup
-
+from time import sleep
 reply_keyboard = [['username, password'],
                   ['start'],
                   ['stop']]
@@ -36,7 +36,7 @@ def main(bot, chat_id, user_data):
         elem.click()
         elem = wait.until(ec.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'امور آموزش')))
         elem.click()
-
+        sleep(5)
         elem = wait.until(ec.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'کارنامه ترم')))
         elem.click()
         elem = wait.until(ec.presence_of_element_located((By.ID, 'iframe_020205')))
