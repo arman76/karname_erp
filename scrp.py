@@ -45,7 +45,6 @@ def main(bot, chat_id, user_data):
         sleep(5)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
-        server.stop()
         ts = soup.find_all('table', class_='grd')
         del soup
         t = ts[-2]
@@ -93,7 +92,6 @@ def main(bot, chat_id, user_data):
         print(user_data)
         try:
             driver.quit()
-            server.stop()
         except Exception as e:
             print(e.args)
             pass
@@ -104,6 +102,5 @@ def main(bot, chat_id, user_data):
         #bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
         try:
             driver.quit()
-            server.stop()
         except Exception as e:
             print(e.args)
