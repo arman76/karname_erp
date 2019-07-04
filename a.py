@@ -16,7 +16,4 @@ def main(bot):
             print(user.split('=')[0], {'username' : (user.split('=')[1]).split(':')[0], 'password' : (user.split('=')[1]).split(':')[1]})
             with open('list.txt', 'r') as f:
                 print(f.readlines())
-            sleep(5)
-        
-        
-
+            sleep(50)
