@@ -8,6 +8,7 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from telegram import ReplyKeyboardMarkup
 from time import sleep
+import os
 from browsermobproxy import Server
 reply_keyboard = [['username, password'],
                   ['start'],
@@ -16,8 +17,15 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 
 def main(bot, chat_id, user_data):
-    driver = webdriver.PhantomJS()
-    driver.set_script_timeout(10)
+    #driver = webdriver.PhantomJS()
+    cwd = os.getcwd()
+    server = Server(cwd + '/Mobilenium-master/bin/browsermob-proxy-2.1.4/bin/browsermob-proxy')
+    server.start()
+    sleep(1)
+    proxy = server.create_proxy()
+    sleep(1)
+    driver = webdriver.PhantomJS(service_args=['--proxy={}'.format(proxy.proxy)])
+    proxy.new_har("google")
     try:
         driver.get("http://erp.guilan.ac.ir/Dashboard.aspx")
         if 'erp.guilan.ac.ir/GoToDashboard.aspx' in driver.current_url:
@@ -45,7 +53,8 @@ def main(bot, chat_id, user_data):
         driver.get(elem.get_property('src'))
         sleep(5)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
-        driver.close()
+        driver.quit()
+        server.stop()
         ts = soup.find_all('table', class_='grd')
         del soup
         t = ts[-2]
@@ -92,7 +101,8 @@ def main(bot, chat_id, user_data):
         
         print(user_data)
         try:
-            driver.close()
+            driver.quit()
+            server.stop()
         except Exception as e:
             print(e.args)
             pass
@@ -102,6 +112,7 @@ def main(bot, chat_id, user_data):
         print('اررررررررررررررررررررروووووووووووووووووورررررررررر۲۲۲۲۲۲۲۲۲۲۲۲۲')
         #bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
         try:
-            driver.close()
+            driver.quit()
+            server.stop()
         except Exception as e:
             print(e.args)
