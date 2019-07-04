@@ -19,7 +19,9 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 def main(bot, chat_id, user_data):
     #driver = webdriver.PhantomJS()
     cwd = os.getcwd()
+    os.system('chmod +x ' + cwd + '/Mobilenium-master/bin/browsermob-proxy-2.1.4/bin/browsermob-proxy')
     server = Server(cwd + '/Mobilenium-master/bin/browsermob-proxy-2.1.4/bin/browsermob-proxy')
+    
     server.start()
     sleep(1)
     proxy = server.create_proxy()
