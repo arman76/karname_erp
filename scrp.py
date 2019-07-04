@@ -8,8 +8,6 @@ from selenium import webdriver
 from bs4 import BeautifulSoup
 from telegram import ReplyKeyboardMarkup
 from time import sleep
-import os
-from browsermobproxy import Server
 reply_keyboard = [['username, password'],
                   ['start'],
                   ['stop']]
@@ -17,17 +15,8 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 
 def main(bot, chat_id, user_data):
-    #driver = webdriver.PhantomJS()
-    cwd = os.getcwd()
-    os.system('chmod +x ' + cwd + '/Mobilenium-master/bin/browsermob-proxy-2.1.4/bin/browsermob-proxy')
-    server = Server(cwd + '/Mobilenium-master/bin/browsermob-proxy-2.1.4/bin/browsermob-proxy')
+    driver = webdriver.PhantomJS()
     
-    server.start()
-    sleep(1)
-    proxy = server.create_proxy()
-    sleep(1)
-    driver = webdriver.PhantomJS(service_args=['--proxy={}'.format(proxy.proxy)])
-    proxy.new_har("google")
     try:
         driver.get("http://erp.guilan.ac.ir/Dashboard.aspx")
         if 'erp.guilan.ac.ir/GoToDashboard.aspx' in driver.current_url:
