@@ -7,7 +7,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium import webdriver
 from bs4 import BeautifulSoup
 from telegram import ReplyKeyboardMarkup
-from time import sleep
 reply_keyboard = [['username, password'],
                   ['start'],
                   ['stop']]
@@ -37,12 +36,10 @@ def main(bot, chat_id, user_data):
         elem.click()
         elem = wait.until(ec.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'امور آموزش')))
         elem.click()
-        sleep(5)
         elem = wait.until(ec.presence_of_element_located((By.PARTIAL_LINK_TEXT, 'کارنامه ترم')))
         elem.click()
         elem = wait.until(ec.presence_of_element_located((By.ID, 'iframe_020205')))
         driver.get(elem.get_property('src'))
-        sleep(5)
         soup = BeautifulSoup(driver.page_source, 'html.parser')
         driver.quit()
         ts = soup.find_all('table', class_='grd')
@@ -85,7 +82,8 @@ def main(bot, chat_id, user_data):
           with open(str(chat_id), 'r') as f:
             print('اررررررررررررررررررروووووووووووووووووووووررررررررررر')
         except FileNotFoundError:
-          bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
+          print('کییییرررر توششش')
+          #bot.send_message(chat_id=chat_id, text='ارور. شاید یوزر پس اشتباه باشه.', reply_markup=markup)
         
         
         
