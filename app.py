@@ -114,7 +114,7 @@ def unknown(bot, update):
 
 
 def main():
-    updater = Updater('427411167:AAEwT1ByVafesnS-kn1ITebZ8zy2SAoUGEk')
+    updater = Updater('')
     _thread.start_new_thread(a.main, (updater.bot,))
     dp = updater.dispatcher
     restart_command_handler = CommandHandler('stop', restart, pass_user_data=True)
