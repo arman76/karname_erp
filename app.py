@@ -28,8 +28,8 @@ markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 def start(update, context):
     update.message.reply_text(
-        'سلام! کار من اینه که با استفاده از یوزرنیم و پسورد erp وارد سامانه بشم'
-        ' و کارنامه ت رو مدام چک کنم هر وقت اتفاقی بیوفته خبرت کنم!'
+        'سلام! چون میدونم گشادی من جات کارنامه رو چک میکنم'
+        ''
         '\n'
         'یوزر و پسوردت وارد یه لیست میشه. به نوبت هر دفعه یه نفر از این لیست چک میشه پس به اندازه ی تعداد افراد تو لیست طول میکشه تا دوباره کارنامه ت چک بشه.',
         reply_markup=markup
@@ -130,15 +130,12 @@ def main():
         entry_points=[CommandHandler('start', start), MessageHandler(Filters.text, start)],
 
         states={
-            CHOOSING: [RegexHandler('^username\, password$',
-                                    user_pass,
-                                    pass_user_data=True),
-                       RegexHandler('^start$',
-                                    add_to_list,
-                                    pass_user_data=True),
-                       RegexHandler('^stop',
-                                    restart,
-                                    pass_user_data=True),
+            CHOOSING: [MessageHandler(Filters.regex('^username\, password$'),
+                                    user_pass),
+                       MessageHandler(Filters.regex('^start$'),
+                                    add_to_list),
+                       MessageHandler(Filters.regex('^stop'),
+                                    restart),
                        CommandHandler('start',
                                       start),
                        CommandHandler('restart',
@@ -148,8 +145,7 @@ def main():
                                       unknown)],
 
             USERPASS: [MessageHandler(Filters.text,
-                                      received_userpass,
-                                      pass_user_data=True)],
+                                      received_userpass)],
         },
 
         fallbacks=[]
