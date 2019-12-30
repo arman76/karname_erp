@@ -26,7 +26,7 @@ reply_keyboard = [['username, password'],
 markup = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
 
 
-def start(bot, update):
+def start(update, context):
     update.message.reply_text(
         'سلام! کار من اینه که با استفاده از یوزرنیم و پسورد erp وارد سامانه بشم'
         ' و کارنامه ت رو مدام چک کنم هر وقت اتفاقی بیوفته خبرت کنم!'
@@ -38,13 +38,15 @@ def start(bot, update):
     return CHOOSING
 
 
-def user_pass(bot, update, user_data):
+def user_pass(update, context):
+    user_data = context.user_data
     user_data['choice'] = 'username'
     update.message.reply_text('خب {} خودتو بده:'.format('نام کاربری'))
     return USERPASS
 
 
-def received_userpass(bot, update, user_data):
+def received_userpass(update, context):
+    user_data = context.user_data
     text = update.message.text
     category = user_data['choice']
     user_data[category] = text
@@ -72,7 +74,10 @@ def received_userpass(bot, update, user_data):
     return CHOOSING
 
 
-def add_to_list(bot, update, user_data):
+def add_to_list(update, context):
+    user_data = context.user_data
+    bot = context.bot
+    
     if 'username' not in user_data:
         user_data['start_app'] = 1
         update.message.reply_text('اول باید نام کاربری و کلمه عبور رو بفرستی!')
@@ -94,7 +99,8 @@ def add_to_list(bot, update, user_data):
     return CHOOSING
 
 
-def restart(bot, update, user_data):
+def restart(update, context):
+    user_data = context.user_data
     user_data.clear()
 
     with open('list.txt', 'r') as f:
@@ -108,13 +114,14 @@ def restart(bot, update, user_data):
     update.message.reply_text('اطلاعاتت پاک شد از لیست هم اومدی بیرون.', reply_markup=markup)
 
 
-def unknown(bot, update):
+def unknown(update, context):
     update.message.reply_text('ورودی یا دستور نامعتبر!', reply_markup=markup)
     return CHOOSING
 
 
 def main():
-    updater = Updater('')
+    updater = Updater('995772295:AAFjjCH_i2ap2Mh0ibWQyjZQNxYAKZM-M8k', use_context=True)
+    # updater = Updater('')
     _thread.start_new_thread(a.main, (updater.bot,))
     dp = updater.dispatcher
     restart_command_handler = CommandHandler('stop', restart, pass_user_data=True)
